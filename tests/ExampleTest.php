@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Skeleton\Tests;
+namespace TallAndSassy\LivewireFriends\Tests;
 
 class ExampleTest extends TestCase
 {

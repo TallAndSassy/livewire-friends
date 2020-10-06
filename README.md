@@ -1,12 +1,11 @@
-# :package_description
-[![License](https://img.shields.io/github/license/:vendor_name/:package_name)](https://github.com/:vendor_name/:package_name/blob/master/LICENSE.md)
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_name/:package_name.svg?style=flat-square)](https://packagist.org/packages/:vendor_name/:package_name)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/:vendor_name/:package_name/run-tests?label=tests)](https://github.com/:vendor_name/:package_name/actions?query=workflow%3Arun-tests+branch%3Amaster)
-[![Coverage Status](https://coveralls.io/repos/github/:vendor_name/:package_name/badge.svg?branch=master)](https://coveralls.io/github/:vendor_name/:package_name?branch=master)
+# :Helper tools to make livewire play nicely with... stuff.
+[![License](https://img.shields.io/github/license/:tallandsassy/:livewire-friends)](https://github.com/:tallandsassy/:livewire-friends/blob/master/LICENSE.md)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/:tallandsassy/:livewire-friends.svg?style=flat-square)](https://packagist.org/packages/:tallandsassy/:livewire-friends)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/:tallandsassy/:livewire-friends/run-tests?label=tests)](https://github.com/:tallandsassy/:livewire-friends/actions?query=workflow%3Arun-tests+branch%3Amaster)
+[![Coverage Status](https://coveralls.io/repos/github/:tallandsassy/:livewire-friends/badge.svg?branch=master)](https://coveralls.io/github/:tallandsassy/:livewire-friends?branch=master)
 
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_name/:package_name.svg?style=flat-square)](https://packagist.org/packages/:vendor_name/:package_name)
+[![Total Downloads](https://img.shields.io/packagist/dt/:tallandsassy/:livewire-friends.svg?style=flat-square)](https://packagist.org/packages/:tallandsassy/:livewire-friends)
 
-**Note:** Run `./configure-skeleton` to get started, or manually replace  ```:author_name``` ```:author_username``` ```:author_email``` ```:vendor_name``` ```:package_name``` ```:package_description``` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](.github/CONTRIBUTING.md), [LICENSE.md](LICENSE.md) and [composer.json](composer.json) files, then delete this line. You can also run `configure-skeleton.sh` to do this automatically.
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
@@ -21,25 +20,25 @@ You can install the package via composer:
 [ ] Make a local table for testing called 'tmp_laravel_package' (per 'phpunit.xml')
 
 ```bash
-composer require spatie/skeleton
+composer require tallandsassy/livewire-friends
 ```
 
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --provider="Spatie\Skeleton\SkeletonServiceProvider" --tag="migrations"
+php artisan vendor:publish --provider="TallAndSassy\LivewireFriends\LivewireFriendsServiceProvider" --tag="migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 ```bash
-php artisan vendor:publish --provider="Spatie\Skeleton\SkeletonServiceProvider" --tag="config"
+php artisan vendor:publish --provider="TallAndSassy\LivewireFriends\LivewireFriendsServiceProvider" --tag="config"
 ```
 
 You can grok the routes (when .env(local)) by visiting 
     
-http://test-spatie.test/grok/Spatie/Skeleton/string
-http://test-spatie.test/grok/Spatie/Skeleton/controller
+http://test-tallandsassy.test/grok/TallAndSassy/LivewireFriends/string
+http://test-tallandsassy.test/grok/TallAndSassy/LivewireFriends/controller
 
 This is the contents of the published config file:
 
@@ -51,8 +50,8 @@ return [
 ## Usage
 
 ``` php
-$skeleton = new Spatie\Skeleton();
-echo $skeleton->echoPhrase('Hello, Spatie!');
+$livewire-friends = new TallAndSassy\LivewireFriends();
+echo $livewire-friends->echoPhrase('Hello, TallAndSassy!');
 ```
 
 ## Testing
@@ -75,7 +74,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
+- [:jjrohrer](https://github.com/:JJ Rohrer)
 - [All Contributors](../../contributors)
 
 ## License

@@ -1,11 +1,11 @@
 {
-    "name": "spatie/skeleton",
-    "description": "package_description",
+    "name": "tallandsassy/livewire-friends",
+    "description": "Helper tools to make livewire play nicely with... stuff.",
     "keywords": [
-        "vendor_name",
-        "package_name"
+        "tallandsassy",
+        "livewire-friends"
     ],
-    "homepage": "https://github.com/vendor_name/package_name",
+    "homepage": "https://github.com/tallandsassy/livewire-friends",
     "license": "MIT",
     "authors": [
         {
@@ -28,13 +28,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\Skeleton\\": "src",
-            "Spatie\\Skeleton\\Database\\Factories\\": "database/factories"
+            "TallAndSassy\\LivewireFriends\\": "src",
+            "TallAndSassy\\LivewireFriends\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\Skeleton\\Tests\\": "tests"
+            "TallAndSassy\\LivewireFriends\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -49,10 +49,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Spatie\\Skeleton\\SkeletonServiceProvider"
+                "TallAndSassy\\LivewireFriends\\LivewireFriendsServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "Spatie\\Skeleton\\SkeletonFacade"
+                "LivewireFriends": "TallAndSassy\\LivewireFriends\\LivewireFriendsFacade"
             }
         }
     },

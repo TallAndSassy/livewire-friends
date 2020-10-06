@@ -1,14 +1,14 @@
 <?php
 
-namespace Spatie\Skeleton\Models;
+namespace TallAndSassy\LivewireFriends\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SkeletonModel extends Model
+class LivewireFriendsModel extends Model
 {
     public $gaurded = [];// Defualt to no mass assignements
     public $fillable = ['name'];
-    public $table = 'skeleton';
+    public $table = 'livewire-friends';
 
     public function getUpperCasedName() : string
     {
