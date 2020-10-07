@@ -1,0 +1,15 @@
+<?php
+
+namespace [namespace];
+
+use Livewire\Component;
+
+class [class] extends Component
+{
+    public string $sample_var = "defaultValue"; // {{$sample_var}} is now avail in your blade.
+
+    public function render()
+    {
+        return view('[view]');
+    }
+}

@@ -5,7 +5,8 @@ namespace TallAndSassy\LivewireFriends;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use TallAndSassy\LivewireFriends\Commands\LivewireFriendsCommand;
+use TallAndSassy\LivewireFriends\Commands\LivewireFriendsCommandPackageMake;
+use TallAndSassy\LivewireFriends\Commands\LivewireFriendsCommandStubs;
 use TallAndSassy\LivewireFriends\Http\Controllers\LivewireFriendsController;
 
 class LivewireFriendsServiceProvider extends ServiceProvider
@@ -13,18 +14,33 @@ class LivewireFriendsServiceProvider extends ServiceProvider
     public function boot()
     {
         if ($this->app->runningInConsole()) {
-            $this->publishes(
+            // Registering package commands.
+            $this->commands(
                 [
-                    __DIR__ . '/../config/livewire-friends.php' => config_path('livewire-friends.php'),
-                ],
-                'config'
+                    LivewireFriendsCommandStubs::class,
+                    LivewireFriendsCommandPackageMake::class,
+                ]
             );
+
+            //            $this->publishes(
+            //                [
+            //                    __DIR__ . '/../config/livewire-friends.php' => config_path('livewire-friends.php'),
+            //                ],
+            //                'config'
+            //            );
+
+            //            $this->publishes(
+            //                [
+            //                    __DIR__ . '/../resources/views' => base_path('resources/views/vendor/livewire-friends'),
+            //                ],
+            //                'views'
+            //            );
 
             $this->publishes(
                 [
-                    __DIR__ . '/../resources/views' => base_path('resources/views/vendor/livewire-friends'),
+                    __DIR__ . '/../stubs' => base_path('stubs'),
                 ],
-                'views'
+                'stubs'
             );
 
             $migrationFileName = 'create_livewire_friends_table.php';
@@ -39,7 +55,7 @@ class LivewireFriendsServiceProvider extends ServiceProvider
                 );
             }
 
-             $this->publishes([
+            $this->publishes([
                  __DIR__.'/../resources/public' => public_path('eleganttechnologies/grok'),
                 ], ['public']);
 
@@ -52,15 +68,6 @@ class LivewireFriendsServiceProvider extends ServiceProvider
             /*$this->publishes([
                 __DIR__.'/../resources/lang' => resource_path('lang/tallandsassy/livewire-friends'),
             ], 'grok.views');*/
-
-
-
-            // Registering package commands.
-            $this->commands(
-                [
-                    LivewireFriendsCommand::class,
-                ]
-            );
         }
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tassylivewirefriends');
