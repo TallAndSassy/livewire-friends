@@ -24,6 +24,15 @@ class LivewireFriendsCommandPackageMake extends MakeCommand
         $destinationNamespace = "$vendorCamelCase\\$packageCamelCase";
         $vendorComposerName = strtolower($vendorCamelCase);
         $packageComposerName = \Illuminate\Support\Str::kebab($packageCamelCase);
+
+
+        $this->vendorNameCamel      = $vendorCamelCase;
+        $this->vendorNameComposer   = $vendorComposerName;
+        $this->vendorNameLower      = $vendorComposerName;
+        $this->packageNameCamel     = $packageCamelCase;
+        $this->packageNameComposer  = $packageComposerName;
+
+
         if ($this->option('pathtopackage')) {
             $destinationRootDir = $this->option('pathtopackage');
         } else {
@@ -42,11 +51,23 @@ class LivewireFriendsCommandPackageMake extends MakeCommand
         }
 
         $viewPath = "$destinationRootDir/$viewOffsetFromPackageRoot/livewire";
+
+        // --- Find out some details, like the blade prefix for this package
+        $nameServiceProvider = "\\$vendorCamelCase\\$packageCamelCase\\{$packageCamelCase}ServiceProvider";
+        $blade_prefix = $nameServiceProvider::$blade_prefix;
+
+
         $this->parser = new ComponentParserFriends(
             $destinationNamespace,
             $viewPath,
             $this->argument('name'),
             $destinationRootDir,
+            $blade_prefix,
+            $this->vendorNameCamel,
+            $this->vendorNameComposer,
+            $this->vendorNameLower,
+            $this->packageNameCamel,
+            $this->packageNameComposer,
         );
 
         if ($this->isReservedClassName($name = $this->parser->className())) {
@@ -60,6 +81,9 @@ class LivewireFriendsCommandPackageMake extends MakeCommand
         $inline = $this->option('inline');
 
         $showWelcomeMessage = $this->isFirstTimeMakingAComponent();
+
+
+
 
         $class = $this->createClass($force, $inline);
         $view = $this->createView($force, $inline);
@@ -80,47 +104,4 @@ class LivewireFriendsCommandPackageMake extends MakeCommand
         }
     }
 
-    //    protected function createClass($force = false, $inline = false)
-    //    {
-    //        $classPath = $this->parser->classPath();
-    //
-    //
-    //        if (File::exists($classPath) && ! $force) {
-    //            $this->line("<options=bold,reverse;fg=red> WHOOPS-IE-TOOTLES </> 😳 \n");
-    //            $this->line("<fg=red;options=bold>Class already exists:</> {$this->parser->relativeClassPath()}");
-    //
-    //            return false;
-    //        }
-    //
-    //        $this->ensureDirectoryExists($classPath);
-    //
-    //        File::put($classPath, $this->parser->classContents($inline));
-    //
-    //        return $classPath;
-    //    }
-    //
-    //    protected function createView($force = false, $inline = false)
-    //    {
-    //        if ($inline) {
-    //            return false;
-    //        }
-    //        $viewPath = $this->parser->viewPath();
-    //
-    //        if (File::exists($viewPath) && ! $force) {
-    //            $this->line("<fg=red;options=bold>View already exists:</> {$this->parser->relativeViewPath()}");
-    //
-    //            return false;
-    //        }
-    //
-    //        $this->ensureDirectoryExists($viewPath);
-    //
-    //        File::put($viewPath, $this->parser->viewContents());
-    //
-    //        return $viewPath;
-    //    }
-    //
-    //    public function isReservedClassName($name)
-    //    {
-    //        return array_search($name, ['Parent', 'Component', 'Interface']) !== false;
-    //    }
 }

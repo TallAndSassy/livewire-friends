@@ -1,0 +1,25 @@
+<?php
+
+namespace [class_namespace];
+
+use Livewire\Component;
+
+
+/*
+        [ ] Be sure to registrer this compoent in [vendorNameCamel]/[packageNameCamel]ServiceProvider.php
+            Something like this in the function boot()...
+                \Livewire\Livewire::component('[bladeprefix]::[view_subpath]',  \[class_namespace]\[class_name]::class);
+
+*/
+class [class_name] extends Component
+{
+    public string $sample_var = "defaultValue"; // {{$sample_var}} is now avail in your blade.
+
+    public function render()
+    {
+        # access via: <livewire:[bladeprefix]::[view_subpath]/>
+        return view('[bladeprefix]::[view_subpath]');
+    }
+}
+
+
