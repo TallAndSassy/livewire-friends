@@ -1,4 +1,4 @@
-# :Helper tools to make livewire play nicely with... stuff.
+# Helper tools to make livewire play nicely with... stuff.
 [![License](https://img.shields.io/github/license/:tallandsassy/:livewire-friends)](https://github.com/:tallandsassy/:livewire-friends/blob/master/LICENSE.md)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/:tallandsassy/:livewire-friends.svg?style=flat-square)](https://packagist.org/packages/:tallandsassy/:livewire-friends)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/:tallandsassy/:livewire-friends/run-tests?label=tests)](https://github.com/:tallandsassy/:livewire-friends/actions?query=workflow%3Arun-tests+branch%3Amaster)
@@ -7,7 +7,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/:tallandsassy/:livewire-friends.svg?style=flat-square)](https://packagist.org/packages/:tallandsassy/:livewire-friends)
 
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+This is a collection of tools for working with livewire. 
 
 ## Support us
 
@@ -17,48 +17,77 @@ Please send love
 
 You can install the package via composer:
 
-[ ] Make a local table for testing called 'tmp_laravel_package' (per 'phpunit.xml')
-
 ```bash
 composer require tallandsassy/livewire-friends
 ```
 
-You can publish and run the migrations with:
+## Usage: lwpmake
+Makes a livewire component that works from within the package space.
+
+Similiar to '<code>php artisan livewire:make SomeNewLivewireComponent</code>'
+
 
 ```bash
-php artisan vendor:publish --provider="TallAndSassy\LivewireFriends\LivewireFriendsServiceProvider" --tag="migrations"
-php artisan migrate
-```
+# Let your vendor name be 'TallAndSassy'
+# Let your package name be 'GrokJetUi'
+# Let your livewire component name be 'SomeNewLivewireComponent'
 
-You can publish the config file with:
+php artisan tassy:lwpmake TallAndSassy GrokJetUi SomeNewLivewireComponent
+
+# You'll see something like:
+    COMPONENT CREATED  🤙
+    CLASS: vendor/tallandsassy/spatie-package17/src/Components/SomeNewLivewireComponent.php
+    VIEW:  vendor/tallandsassy/spatie-package17/resources/views/livewire/some-new-livewire-component.blade.php
+```
+1) See the generated class for inline instructions on how to register this livewire component the app.
+2) See the livewire.blade file for inline instructions on how to include this component into your own blades. 
+
+
+
+We assume we're using the spatie package pattern (from their package course) of vendor name all lowercase
+and package name as kebab case-ish.  If needed, you can override this pattern with the <code>--pathtopackage</code>
+option. This seems to come up with funny things, like WordsNextToNumbers17
 ```bash
-php artisan vendor:publish --provider="TallAndSassy\LivewireFriends\LivewireFriendsServiceProvider" --tag="config"
+# Let your vendor name be 'TallAndSassy'
+# Let your package name be 'SpatiePackage17'
+# Let your livewire component name be 'SomeNewLivewireComponent'
+# have your package at '<code>vendor/tallandsassy/spatie-package-17</code>' vs the expected '<code>vendor/tallandsassy/spatie-package17</code>'
+
+php artisan tassy:lwpmake TallAndSassy SpatiePackage17 SomeNewLivewireComponent  --pathtopackage="vendor/tallandsassy/spatie-package-17"
+
+# You'll see something like:
+     COMPONENT CREATED  🤙
+
+    CLASS: vendor/tallandsassy/spatie-package-17/src/Components/SomeNewLivewireComponent.php
+    VIEW:  vendor/tallandsassy/spatie-package-17/resources/views/livewire/some-new-livewire-component.blade.php
 ```
 
-You can grok the routes (when .env(local)) by visiting 
-    
-http://test-tallandsassy.test/grok/TallAndSassy/LivewireFriends/string
-http://test-tallandsassy.test/grok/TallAndSassy/LivewireFriends/controller
+Your livewire components can be deep, like State->City->Districts->Blocks->Party
 
-This is the contents of the published config file:
+```bash
+php artisan tassy:lwpmake TallAndSassy SpatiePackage17 States/Cities/Districts/Blocks/Party  --pathtopackage="vendor/tallandsassy/spatie-package-17"
 
-```php
-return [
-];
+# COMPONENT CREATED  🤙
+    CLASS: vendor/tallandsassy/spatie-package-17/src/Components/States/Cities/Districts/Blocks/Party.php
+    VIEW:  vendor/tallandsassy/spatie-package-17/resources/views/livewire/states/cities/districts/blocks/party.blade.php
 ```
 
-## Usage
 
-``` php
-$livewire-friends = new TallAndSassy\LivewireFriends();
-echo $livewire-friends->echoPhrase('Hello, TallAndSassy!');
+## Troubleshooting: lwpmake
+if you see
+```bash
+ Access to undeclared static property: TallAndSassy\GrokJetUi\GrokJetUiServiceProvider::$blade_prefix
 ```
+Yup, we're assuming $blade_prefix is a static property in your PackageServiceProvider. (TODO - make me a command line option)
+
+
+## Assumptions
+As of this writing, we assume... 
+1) the livewire components (controllers) live in vendor/vendorname/my-package/src/Components...
+2) the blade files are vendor/vendorname/my-package/resources/views/livewire...
+3) Your MyPackageServiceProvider.php class has a static property $blade_prefix (The Tassy package install inserts this automatically)
 
 ## Testing
-
-``` bash
-composer test
-```
 
 ## Changelog
 
@@ -74,7 +103,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [:jjrohrer](https://github.com/:JJ Rohrer)
+- [:jjrohrer](https://github.com/JJRohrer)
 - [All Contributors](../../contributors)
 
 ## License
