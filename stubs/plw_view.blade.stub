@@ -1,17 +1,14 @@
 <div>
 <div>
     {{-- [quote] --}}
-    Sample: view for [vendorNameCamel]/[class_name] with live data $sample_var({{$sample_var}}
+    Sample: view for [vendorNameCamel]/[class_name] with live data $sample_var({{$sample_var}})
     {{-- Access this blade via
         <livewire:[bladeprefix]::[view_subpath]/>
 
         Peers:
         This works closely with [class_namespace]\[class_name]
             [class_path]
-        [ ] Be sure to registrer this compoent in [vendorNameCamel]/[packageNameCamel]ServiceProvider.php
-            Something like this in the function boot()...
-                \Livewire\Livewire::component('[bladeprefix]::[view_subpath]',  [class_namespace]\[class_name]::class);
-
+        See the above file for registration instructions...            
     --}}
 </div>
 
