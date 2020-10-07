@@ -3,7 +3,7 @@
 namespace TallAndSassy\LivewireFriends\Commands;
 
 use Illuminate\Console\Command;
-use \Livewire\Commands;
+
 class LivewireFriendsCommandStubs extends Command
 {
     public $signature = 'tassy:lwstubs';
@@ -40,4 +40,3 @@ class LivewireFriendsCommandStubs extends Command
         $this->comment('We have published a new set up livewire stubs, so "php artisan livewire:create" will now use these, instead of the originals. You can safely remove them from the /stubs directory, whenever you wish to revert to the default stubs."');
     }
 }
-

@@ -2,12 +2,7 @@
 
 namespace TallAndSassy\LivewireFriends\Commands;
 
-use Illuminate\Support\Facades\File;
-use Livewire\Commands\ComponentParser;
 use Livewire\Commands\MakeCommand;
-
-
-
 
 class LivewireFriendsCommandPackageMake extends MakeCommand
 {
@@ -26,11 +21,11 @@ class LivewireFriendsCommandPackageMake extends MakeCommand
         $packageComposerName = \Illuminate\Support\Str::kebab($packageCamelCase);
 
 
-        $this->vendorNameCamel      = $vendorCamelCase;
-        $this->vendorNameComposer   = $vendorComposerName;
-        $this->vendorNameLower      = $vendorComposerName;
-        $this->packageNameCamel     = $packageCamelCase;
-        $this->packageNameComposer  = $packageComposerName;
+        $this->vendorNameCamel = $vendorCamelCase;
+        $this->vendorNameComposer = $vendorComposerName;
+        $this->vendorNameLower = $vendorComposerName;
+        $this->packageNameCamel = $packageCamelCase;
+        $this->packageNameComposer = $packageComposerName;
 
 
         if ($this->option('pathtopackage')) {
@@ -103,5 +98,4 @@ class LivewireFriendsCommandPackageMake extends MakeCommand
             }
         }
     }
-
 }
