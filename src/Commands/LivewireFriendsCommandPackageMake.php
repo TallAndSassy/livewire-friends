@@ -6,9 +6,28 @@ use Livewire\Commands\MakeCommand;
 
 class LivewireFriendsCommandPackageMake extends MakeCommand
 {
-    protected $signature = 'tassy:lwpmake {vendorCamelCase} {packageCamelCase}  {name}  {--force} {--inline} {--pathtopackage=}';
+    protected $signature = 'tassy:lwpmake {vendorCamelCase} {packageCamelCase}  {name}  {--force} {--inline} {--pathtopackage=} {--bladeprefix=}';
 
-    protected $description = 'Create a new Livewire component in a package. use: --pathtopackage="vendor/blah/mah" if the autogenerator does not seem to work.';
+    protected $description = 'Livewire Package Make: Create a new Livewire component for an existing package. use: --pathtopackage="vendor/blah/mah" if the autogenerator does not seem to work.';
+
+    public $help = <<<EOD
+    This makes a new livewire component
+    TODO For You: Required - Look at the generate component class for instructions on on how to register this component with the system.
+
+    Usage:
+    ------
+                                  (vendor)     (package)
+        php artisan tassy:lwpmake TallAndSassy GrokJetUi SomeNewLivewireComponent --bladeprefix="tassy"
+
+    Troubleshooting:
+    ----------------
+    Q: I see 'No hint path defined for [tassy]'
+    A: You specified a bladeprefix that doesn't match what you defined for the ServiceProvider.
+    Look at your version of TallAndSassy\GrokJetUi where you define something like
+        Route::macro('tassier',...
+    In this case, 'tassier' is the prefix you should have specified.
+
+    EOD;
 
     public function handle()
     {
@@ -49,7 +68,17 @@ class LivewireFriendsCommandPackageMake extends MakeCommand
 
         // --- Find out some details, like the blade prefix for this package
         $nameServiceProvider = "\\$vendorCamelCase\\$packageCamelCase\\{$packageCamelCase}ServiceProvider";
-        $blade_prefix = $nameServiceProvider::$blade_prefix;
+
+        if ($this->option('bladeprefix')) {
+            $blade_prefix = $this->option('bladeprefix');
+        } else {
+            if (! isset($nameServiceProvider::$blade_prefix)) {
+                $this->line("<options=bold,reverse;fg=red> No blade prefix found. You can either specify it on the command line via  --bladeprefix=\"blah\" or give your service provider the static property 'public static \$blade_prefix' </> 😳 \n");
+
+                return;
+            }
+            $blade_prefix = $nameServiceProvider::$blade_prefix;
+        }
 
 
         $this->parser = new ComponentParserFriends(
